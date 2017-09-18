@@ -1,41 +1,28 @@
 <template>
   <div id="app">
-    <my-menu title="Meu Primeiro Componente">
-      <ul>
-        <li>Item 1</li>
-        <li>Item 2</li>
-        <li>Item 3</li>
-      </ul>
-    </my-menu>
-
-    <img src="http://vuejs.org/images/logo.png">
-    <h1>{{ msg }}</h1>
+    {{msg}}
+    <app-header></app-header>
+    <app-content></app-content>
+    <app-footer></app-footer>
   </div>
 </template>
 
 <script>
-import MyMenu from './MyMenu.vue';
+import AppHeader from './layout/AppHeader.vue';
+import AppContent from './layout/AppContent.vue';
+import AppFooter from './layout/AppFooter.vue';
 
 export default {
   name: 'app',
   components: {
-    MyMenu
+    AppHeader, AppContent, AppFooter
   },
-  data () {
-    return {
-      msg: 'Welcome to Your Vue.js App'
-    }
+  created: function () {
+    Materialize.toast('Materialize rodando irmão', 1000);
   }
 }
 </script>
 
 <style scoped>
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
+
 </style>

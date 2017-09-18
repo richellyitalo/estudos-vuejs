@@ -1,6 +1,6 @@
 <template>
-  <h1>{{title}}</h1>
-  <div>
+  <div @click="onMenuClick">
+    <h1>{{title}}</h1>
     <slot></slot>
   </div>
 </template>
@@ -11,6 +11,11 @@ export default {
     title: {
       type: String,
       default: 'Menu sem título'
+    }
+  },
+  methods: {
+    onMenuClick: function() {
+      this.$emit('menu-click', 'Mensagem do emissor!');
     }
   }
 }
