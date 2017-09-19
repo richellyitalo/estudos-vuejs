@@ -1,0 +1,76 @@
+[{
+  "id": 1,
+  "name": "Ramon",
+  "email": "rhenrie0@biblegateway.com",
+  "gender": "Male"
+}, {
+  "id": 2,
+  "name": "Brande",
+  "email": "bwhitesel1@techcrunch.com",
+  "gender": "Female"
+}, {
+  "id": 3,
+  "name": "Gannon",
+  "email": "ggosnold2@nbcnews.com",
+  "gender": "Male"
+}, {
+  "id": 4,
+  "name": "Ariel",
+  "email": "areddings3@toplist.cz",
+  "gender": "Male"
+}, {
+  "id": 5,
+  "name": "Candis",
+  "email": "cjohnke4@wunderground.com",
+  "gender": "Female"
+}, {
+  "id": 6,
+  "name": "Purcell",
+  "email": "pcraske5@live.com",
+  "gender": "Male"
+}, {
+  "id": 7,
+  "name": "Tillie",
+  "email": "trigby6@phoca.cz",
+  "gender": "Female"
+}, {
+  "id": 8,
+  "name": "Lorene",
+  "email": "lcardozo7@umich.edu",
+  "gender": "Female"
+}, {
+  "id": 9,
+  "name": "Marwin",
+  "email": "mcalvard8@icio.us",
+  "gender": "Male"
+}, {
+  "id": 10,
+  "name": "Rutger",
+  "email": "rrowland9@foxnews.com",
+  "gender": "Male"
+}, {
+  "id": 11,
+  "name": "Lewie",
+  "email": "lshrevea@bloglines.com",
+  "gender": "Male"
+}, {
+  "id": 12,
+  "name": "Salem",
+  "email": "sbelfittb@elpais.com",
+  "gender": "Male"
+}, {
+  "id": 13,
+  "name": "Anne-corinne",
+  "email": "adavidwitzc@oaic.gov.au",
+  "gender": "Female"
+}, {
+  "id": 14,
+  "name": "Cate",
+  "email": "ckapiloffd@hud.gov",
+  "gender": "Female"
+}, {
+  "id": 15,
+  "name": "Joane",
+  "email": "jduberrye@earthlink.net",
+  "gender": "Female"
+}]

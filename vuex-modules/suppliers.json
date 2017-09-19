@@ -1,0 +1,101 @@
+[{
+  "id": 1,
+  "name": "Escort",
+  "quantity": 99
+}, {
+  "id": 2,
+  "name": "Escalade EXT",
+  "quantity": 69
+}, {
+  "id": 3,
+  "name": "XK Series",
+  "quantity": 70
+}, {
+  "id": 4,
+  "name": "Mighty Max",
+  "quantity": 6
+}, {
+  "id": 5,
+  "name": "Montana",
+  "quantity": 80
+}, {
+  "id": 6,
+  "name": "Dakota",
+  "quantity": 76
+}, {
+  "id": 7,
+  "name": "Savana 3500",
+  "quantity": 54
+}, {
+  "id": 8,
+  "name": "Focus",
+  "quantity": 70
+}, {
+  "id": 9,
+  "name": "Intrigue",
+  "quantity": 80
+}, {
+  "id": 10,
+  "name": "G6",
+  "quantity": 29
+}, {
+  "id": 11,
+  "name": "Maxima",
+  "quantity": 96
+}, {
+  "id": 12,
+  "name": "Prelude",
+  "quantity": 40
+}, {
+  "id": 13,
+  "name": "Dakota",
+  "quantity": 14
+}, {
+  "id": 14,
+  "name": "Nitro",
+  "quantity": 25
+}, {
+  "id": 15,
+  "name": "300",
+  "quantity": 1
+}, {
+  "id": 16,
+  "name": "Cayman",
+  "quantity": 74
+}, {
+  "id": 17,
+  "name": "900",
+  "quantity": 83
+}, {
+  "id": 18,
+  "name": "DBS",
+  "quantity": 97
+}, {
+  "id": 19,
+  "name": "GLK-Class",
+  "quantity": 46
+}, {
+  "id": 20,
+  "name": "Truck",
+  "quantity": 74
+}, {
+  "id": 21,
+  "name": "M-Class",
+  "quantity": 86
+}, {
+  "id": 22,
+  "name": "62",
+  "quantity": 42
+}, {
+  "id": 23,
+  "name": "9-5",
+  "quantity": 29
+}, {
+  "id": 24,
+  "name": "Tundra",
+  "quantity": 19
+}, {
+  "id": 25,
+  "name": "C70",
+  "quantity": 82
+}]
