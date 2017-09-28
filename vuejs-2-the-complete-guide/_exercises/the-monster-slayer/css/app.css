@@ -92,3 +92,10 @@ button {
 #give-up:hover {
     background-color: #c7c7c7;
 }
+
+.fade-enter {
+    opacity: 0;
+}
+.fade-enter-active {
+    transition: opacity .5s;
+}

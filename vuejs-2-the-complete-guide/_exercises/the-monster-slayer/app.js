@@ -4,7 +4,8 @@ new Vue({
     playerHealth: 100,
     monsterHealth: 100,
     isGameIsRunning: false,
-    turns: []
+    turns: [],
+    currentTurn: 0
   },
   methods: {
     startGame: function () {
@@ -18,13 +19,14 @@ new Vue({
       this.monsterHealth -= damage;
       this.turns.unshift({
         isPlayer: true,
-        text: 'Você atacou o monstro com dano de ' + damage
+        text: 'Você atacou o monstro com dano de ' + damage,
+        id: this.currentTurn + 1
       });
       
       if (this.checkWin()) {
         return;
       }
-
+      this.currentTurn++;
       this.monsterAttacks();
       this.checkWin();
     },
@@ -33,8 +35,10 @@ new Vue({
       this.monsterHealth -= damage;
       this.turns.unshift({
         isPlayer: true,
-        text: 'Você deu um ataque especial no monstro com dano de ' + damage
+        text: 'Você deu um ataque especial no monstro com dano de ' + damage,
+        id: this.currentTurn + 1
       });
+      this.currentTurn++;
 
       if (this.checkWin()) {
         return;
@@ -50,8 +54,10 @@ new Vue({
       }
       this.turns.unshift({
         isPlayer: true,
-        text: 'Você se curou em 10'
+        text: 'Você se curou em 10',
+        id: this.currentTurn + 1
       });
+      this.currentTurn++;
       this.monsterAttacks();
     },
     giveUp: function () {
@@ -64,9 +70,11 @@ new Vue({
         vm.playerHealth -= damage;
         vm.turns.unshift({
           isPlayer: false,
-          text: 'O monstro lhe atacou com dano de ' + damage
+          text: 'O monstro lhe atacou com dano de ' + damage,
+          id: vm.currentTurn + 1
         });
       }, 400);
+      this.currentTurn++;
     },
     calculateDamage: function (min, max) {
       return Math.max(Math.floor(Math.random() * max) + 1, min);
