@@ -1,21 +1,17 @@
 <script>
-import axios from 'axios'
+import http from '@/services/http'
 
 export default {
   name: 'Categories',
-  mounted () {
-    const url = 'http://localhost:3456/categoria'
-    axios
-      .get(url)
-      .then(this.successHandler)
-      .catch(this.errorHandler)
+  data () {
+    return {
+      list: []
+    }
   },
-  methods: {
-    successHandler (res) {
-      console.log(res.data)
-    },
-    errorHandler (error) {
-      console.warn(error)
+  async mounted () {
+    const response = await http.get('/categoria')
+    if (response != null) {
+      this.list = response.data.categories
     }
   }
 }
@@ -24,5 +20,28 @@ export default {
 <template>
   <div>
     <h1>Sou um componente Cat</h1>
+    <div class="row">
+      <div
+        class="col-sm-6 col-md-4"
+        v-for="category in list"
+        :key="category.id">
+        <div class="thumbnail">
+          <div class="caption">
+            <h3>{{ category.name }}</h3>
+            <p>
+              <a href="#" class="btn btn-default btn-xs" role="button">Button</a>
+              <a href="#" class="btn btn-default btn-xs" role="button">Button</a>
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
+
+<style scoped>
+  .thumbnail {
+    min-height: 150px;
+  }
+</style>
+
