@@ -3,7 +3,7 @@ import index from './'
 export default [
   {
     path: '/',
-    name: 'dashboard.index',
+    name: 'index',
     component: index
   }
 ]

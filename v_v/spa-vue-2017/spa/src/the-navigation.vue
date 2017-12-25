@@ -1,8 +1,18 @@
 <script>
+import localforage from 'localforage'
+
 export default {
   computed: {
     shouldDisplayNavigation () {
       return this.$route.name !== 'auth.index'
+    }
+  },
+  methods: {
+    logout () {
+      localforage.removeItem('token')
+        .then(() => {
+          this.$router.push({ name: 'auth.index' })
+        })
     }
   }
 }
@@ -20,18 +30,18 @@ export default {
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <router-link class="navbar-brand" :to="{ name: 'dashboard.index' }">SPA com VueJS</router-link>
+          <router-link class="navbar-brand" :to="{ name: 'index' }">SPA com VueJS</router-link>
         </div>
 
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
           <ul class="nav navbar-nav">
-            <li><router-link :to="{ name: 'dashboard.index' }">Dashboard</router-link></li>
+            <li><router-link :to="{ name: 'index' }">Dashboard</router-link></li>
             <li><router-link :to="{ name: 'categories.index' }">Categorias</router-link></li>
             <li><router-link :to="{ name: 'users.index' }">Usuários</router-link></li>
           </ul>
           <ul class="nav navbar-nav navbar-right">
-            <li><a href="#">Sair</a></li>
+            <li><a href="" @click.prevent="logout">Sair</a></li>
           </ul>
         </div><!-- /.navbar-collapse -->
       </div>

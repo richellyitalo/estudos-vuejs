@@ -1,15 +1,37 @@
 <script>
 import axios from 'axios'
+import localforage from 'localforage'
 
 export default {
   name: 'Authentication',
   data () {
     return {
-      email: '',
-      password: ''
+      email: 'vedovelli@gmail.com',
+      password: '123456'
     }
   },
   methods: {
+    // aqui usando o ES6 com promessas (async-await)
+    async login () {
+      try {
+        const { email, password } = this
+
+        const response = await axios.post(
+          'http://localhost:3456/autenticacao',
+          { email, password }
+        )
+
+        const { token } = response.data
+        localforage.setItem('token', token)
+          .then(() => {
+            this.$router.push({ name: 'index' })
+          })
+      } catch (error) {
+        console.warn(error)
+      }
+    }
+    /*
+    // Maneira utilizada tratando a promessa pelo próprio axios
     login () {
       const { email, password } = this
       const payload = { email, password }
@@ -19,11 +41,13 @@ export default {
         .catch(this.errorHandler)
     },
     successHandler (res) {
-      console.warn(res.data)
+      const { token } = res.data
+      localforage.setItem('token', token)
     },
     errorHandler (error) {
       console.warn(error)
     }
+    */
   }
 }
 </script>
