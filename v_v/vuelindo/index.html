@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Introdução</title>
+</head>
+<body>
+  <div id="app">
+    <h1 v-show="visible" :class="{'red': error}">{{ title }}</h1>
+    <primeiro-componente></primeiro-componente>
+    <segundo-componente></segundo-componente>
+  </div>
+  <script src="vue.js"></script>
+  <script src="bundle.js"></script>
+  <style>
+    .red {
+      color: tomato;
+    }
+  </style>
+</body>
+</html>
