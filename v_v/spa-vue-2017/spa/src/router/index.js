@@ -6,6 +6,7 @@ import dashboard from '@app/dashboard/routes'
 import categories from '@app/categories/routes'
 import auth from '@app/auth/routes'
 import users from '@app/users/routes'
+import { bus } from '@/plugins/event-bus'
 
 Vue.use(Router)
 
@@ -21,7 +22,7 @@ const router = new Router({
   routes
 })
 
-router.beforeEach(async (to, from, next) => {
+const checkAuth = async (to, from, next) => {
   const token = await localforage.getItem('token')
 
   if (to.name !== 'auth.index' && token == null) {
@@ -29,6 +30,15 @@ router.beforeEach(async (to, from, next) => {
     return
   }
   next()
+}
+
+const clearAlerts = () => {
+  bus.$emit('clear-alerts')
+}
+
+router.beforeEach((to, from, next) => {
+  checkAuth(to, from, next)
+  clearAlerts()
 })
 
 export default router
