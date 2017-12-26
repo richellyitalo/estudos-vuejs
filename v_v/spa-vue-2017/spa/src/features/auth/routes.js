@@ -1,4 +1,4 @@
-import index from './'
+const index = () => import('./')
 
 export default [
   {

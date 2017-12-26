@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1>Sou um componente Users.index</h1>
+    <h2>Usuários</h2>
   </div>
 </template>
 

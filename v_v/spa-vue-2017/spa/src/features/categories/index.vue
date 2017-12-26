@@ -53,6 +53,9 @@ export default {
     }
   },
   computed: {
+    hasCategories () {
+      return this.list.length > 0
+    },
     shouldDisplayNew () {
       return this.$route.name === 'categories.index'
     },
@@ -81,7 +84,11 @@ export default {
       <router-view @update-category-list="updateList"></router-view>
     </transition>
 
-    <div class="row">
+    <div class="no-categories" v-show="!hasCategories">
+      <h4>Não há categorias cadastradas.</h4>
+    </div>
+
+    <div class="row" v-show="hasCategories">
       <div
         class="col-sm-6 col-md-4"
         v-for="category in list"
@@ -105,6 +112,9 @@ export default {
 </template>
 
 <style scoped>
+  .no-categories {
+    padding: 30px;
+  }
   .thumbnail {
     min-height: 150px;
   }

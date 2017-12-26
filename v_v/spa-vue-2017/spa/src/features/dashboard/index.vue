@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1>Sou um componente Dashboard.index</h1>
+    <h2>Dashboard</h2>
   </div>
 </template>
 
