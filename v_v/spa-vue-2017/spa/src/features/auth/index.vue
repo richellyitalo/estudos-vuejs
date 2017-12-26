@@ -10,6 +10,14 @@ export default {
       password: '123456'
     }
   },
+  mounted () {
+    if (window.location.search.indexOf('expired=true') > -1) {
+      this.$bus.$emit('display-alert', {
+        type: 'error',
+        message: 'Login expirado. Favor logar novamente.'
+      })
+    }
+  },
   methods: {
     // aqui usando o ES6 com promessas (async-await)
     async login () {

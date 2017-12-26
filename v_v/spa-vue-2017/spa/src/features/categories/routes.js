@@ -8,7 +8,7 @@ export default [
     component: index,
     children: [
       {
-        path: '/categories/form:id?',
+        path: '/categories/form/:id?',
         name: 'categories.form',
         component: form
       }

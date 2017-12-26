@@ -20,10 +20,22 @@ export default {
   },
   computed: {
     shouldDisplaySuccessMessage () {
-      return this.messages.success !== ''
+      const condicao = this.messages.success !== ''
+      if (condicao) {
+        setTimeout(() => {
+          this.messages.success = ''
+        }, 6000)
+      }
+      return condicao
     },
     shouldDisplayErrorMessage () {
-      return this.messages.error !== ''
+      const condicao = this.messages.error !== ''
+      if (condicao) {
+        setTimeout(() => {
+          this.messages.error = ''
+        }, 6000)
+      }
+      return condicao
     }
   },
   methods: {

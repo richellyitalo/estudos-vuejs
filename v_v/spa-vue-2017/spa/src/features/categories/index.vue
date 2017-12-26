@@ -1,5 +1,6 @@
 <script>
 import http from '@/services/http'
+import findIndex from 'lodash/findIndex'
 
 export default {
   name: 'Categories',
@@ -15,8 +16,40 @@ export default {
     }
   },
   methods: {
+    askRemove (category) {
+      const confirm = window.confirm(`Deseja remover ${category.name}?`)
+    
+      if (confirm) {
+        this.doRemove(category.id)
+      }
+    },
+    async doRemove (id) {
+      const response = await http.delete(`/categoria/${id}`)
+      const { message } = response.data
+      const index = findIndex(this.list, { id: id})
+
+      if (index > -1) {
+        this.list.splice(index, 1)
+        
+        this.$bus.$emit('display-alert', {
+          type: 'success',
+          message
+        })
+      }
+    },
     navigation (route) {
       this.$router.push({ name: route })
+    },
+    updateList (obj) {
+      const { category } = obj
+      const index = findIndex(this.list, { 'id': category.id })
+
+      if (index > -1) {
+        this.list[index].name = category.name
+        return
+      }
+      
+      this.list.unshift(category)
     }
   },
   computed: {
@@ -45,7 +78,7 @@ export default {
     </h2>
     
     <transition name="slide-fade">
-      <router-view></router-view>
+      <router-view @update-category-list="updateList"></router-view>
     </transition>
 
     <div class="row">
@@ -57,8 +90,12 @@ export default {
           <div class="caption">
             <h3>{{ category.name }}</h3>
             <p class="text-right">
-              <a href="#" class="btn btn-default btn-xs" role="button">Editar</a>
-              <a href="#" class="btn btn-default btn-danger btn-xs" role="button">Excluir</a>
+              <router-link 
+                :to="{ name: 'categories.form', params : { id: category.id } }"
+                class="btn btn-default btn-xs">
+                Editar
+              </router-link>
+              <a href="" @click.prevent="askRemove(category)" class="btn btn-default btn-danger btn-xs" role="button">Excluir</a>
             </p>
           </div>
         </div>

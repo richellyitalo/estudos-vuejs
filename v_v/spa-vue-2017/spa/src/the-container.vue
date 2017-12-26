@@ -14,7 +14,7 @@ export default {
     <the-navigation></the-navigation>
     <div class="container">
       <the-alerts></the-alerts>
-      <router-view/>
+      <router-view></router-view>
     </div>
   </div>
 </template>
