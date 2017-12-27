@@ -7,7 +7,6 @@ import categories from '@app/categories/routes'
 import auth from '@app/auth/routes'
 import users from '@app/users/routes'
 import { bus } from '@/plugins/event-bus'
-import store from '@/store'
 
 Vue.use(Router)
 
@@ -25,7 +24,6 @@ const router = new Router({
 
 const checkAuth = async (to, from, next) => {
   const token = await localforage.getItem('token')
-  store.dispatch('setToken', { token })
 
   if (to.name !== 'auth.index' && token == null) {
     next({ name: 'auth.index' })

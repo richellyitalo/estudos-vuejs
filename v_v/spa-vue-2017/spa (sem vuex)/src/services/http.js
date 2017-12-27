@@ -2,34 +2,22 @@ import axios from 'axios'
 import localforage from 'localforage'
 import router from '@/router'
 import { bus } from '@/plugins/event-bus'
-import store from '@/store'
 
 const http = axios.create({
   baseURL: 'http://localhost:3456'
 })
 
-const setSearching = (state) => {
-  store.dispatch('setSearching', { isSearching: state })
-}
-
 // intercept request
 const intercepRequest = async (config) => {
-  setSearching(true)
   const token = await localforage.getItem('token')
   config.headers.common['x-access-token'] = token
   return config
 }
-const intercepRequestError = (error) => {
-  setSearching(false)
-  return Promise.reject(error)
-}
+const intercepRequestError = (error) => Promise.reject(error)
 
 http.interceptors.request.use(intercepRequest, intercepRequestError)
 
-const intercepResponse = async (response) => {
-  setSearching(false)
-  return response
-}
+const intercepResponse = async (response) => response
 
 const intercepResponseError = (error) => {
   let message = error.message
@@ -51,9 +39,6 @@ const intercepResponseError = (error) => {
     type: 'error',
     message
   })
-
-  setSearching(true)
-
   return Promise.reject(error)
 }
 

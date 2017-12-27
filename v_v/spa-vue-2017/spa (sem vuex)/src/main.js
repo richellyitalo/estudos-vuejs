@@ -2,7 +2,6 @@
 // (runtime-only or standalone) has been set in webpack.base.conf with an alias.
 import Vue from 'vue'
 import Vuelidate from 'vuelidate'
-import Gravatar from 'vue-gravatar'
 
 import TheContainer from './the-container'
 import router from './router'
@@ -13,7 +12,6 @@ Vue.config.productionTip = false
 
 Vue.use(eventBus)
 Vue.use(Vuelidate)
-Vue.component('v-gravatar', Gravatar)
 
 window.$ = window.jQuery = require('jquery')
 require('bootstrap-sass')

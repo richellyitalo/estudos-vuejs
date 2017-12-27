@@ -1,7 +1,6 @@
 <script>
 import axios from 'axios'
 import localforage from 'localforage'
-import { mapActions } from 'vuex'
 
 export default {
   name: 'Authentication',
@@ -20,7 +19,6 @@ export default {
     }
   },
   methods: {
-    ...mapActions(['setToken']),
     // aqui usando o ES6 com promessas (async-await)
     async login () {
       try {
@@ -33,8 +31,7 @@ export default {
 
         const { token } = response.data
         localforage.setItem('token', token)
-          .then((token) => {
-            this.setToken({ token })
+          .then(() => {
             this.$router.push({ name: 'index' })
           })
       } catch (error) {

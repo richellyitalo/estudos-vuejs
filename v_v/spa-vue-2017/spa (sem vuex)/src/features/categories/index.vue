@@ -1,13 +1,21 @@
 <script>
-import { mapState, mapActions } from 'vuex'
+import http from '@/services/http'
+import findIndex from 'lodash/findIndex'
 
 export default {
   name: 'Categories',
-  mounted () {
-    this.fetch()
+  data () {
+    return {
+      list: []
+    }
+  },
+  async mounted () {
+    const response = await http.get('/categoria')
+    if (response != null) {
+      this.list = response.data.categories
+    }
   },
   methods: {
-    ...mapActions('categories', ['fetch', 'update', 'remove']),
     askRemove (category) {
       const confirm = window.confirm(`Deseja remover ${category.name}?`)
 
@@ -15,25 +23,36 @@ export default {
         this.doRemove(category.id)
       }
     },
-    doRemove (id) {
-      this.remove({ id })
-        .then(message => {
-          this.$bus.$emit('display-alert', {
-            type: 'success',
-            message
-          })
+    async doRemove (id) {
+      const response = await http.delete(`/categoria/${id}`)
+      const { message } = response.data
+      const index = findIndex(this.list, { id })
+
+      if (index > -1) {
+        this.list.splice(index, 1)
+
+        this.$bus.$emit('display-alert', {
+          type: 'success',
+          message
         })
+      }
     },
     navigation (route) {
       this.$router.push({ name: route })
     },
     updateList (obj) {
-      this.update(obj.category)
+      const { category } = obj
+      const index = findIndex(this.list, { 'id': category.id })
+
+      if (index > -1) {
+        this.list[index].name = category.name
+        return
+      }
+
+      this.list.unshift(category)
     }
   },
   computed: {
-    ...mapState('categories', ['list']),
-    ...mapState(['isSearching']),
     hasCategories () {
       return this.list.length > 0
     },
@@ -65,11 +84,7 @@ export default {
       <router-view @update-category-list="updateList"></router-view>
     </transition>
 
-    <div class="text-center" v-show="isSearching">
-      <img src="../../assets/images/loading.gif" height="80" alt="Loading..." />
-    </div>
-
-    <div class="no-categories" v-show="!hasCategories && !isSearching">
+    <div class="no-categories" v-show="!hasCategories">
       <h4>Não há categorias cadastradas.</h4>
     </div>
 
