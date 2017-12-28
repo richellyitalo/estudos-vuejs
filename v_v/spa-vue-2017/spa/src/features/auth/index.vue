@@ -27,7 +27,7 @@ export default {
         const { email, password } = this
 
         const response = await axios.post(
-          'http://localhost:3456/autenticacao',
+          '/autenticacao',
           { email, password }
         )
 
