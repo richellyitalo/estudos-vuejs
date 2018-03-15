@@ -1,5 +1,5 @@
 <script>
-import http from '@/services/http'
+// import http from '@/services/http'
 import { required } from 'vuelidate/lib/validators'
 import { mapActions } from 'vuex'
 
@@ -29,13 +29,6 @@ export default {
   },
   mounted () {
     this.fetch()
-  },
-  watch: {
-    '$route' () {
-      if (this.$route.params.id != null) {
-        this.fetch()
-      }
-    }
   },
   methods: {
     ...mapActions('categories', ['fetchOne', 'save']),
