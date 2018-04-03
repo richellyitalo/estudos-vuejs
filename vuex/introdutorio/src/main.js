@@ -6,6 +6,7 @@ import router from './router'
 import Vuex, { mapState, mapGetters, mapMutations } from 'vuex'
 import faker from 'faker'
 import { ADD_BAD_TOMATO, ADD_RAND_TOMATO } from './mutation-types'
+import axios from 'axios'
 
 import '@/assets/app.sass'
 
@@ -20,10 +21,10 @@ const store = new Vuex.Store({
   state: {
     count: 0,
     users: [
-      {name: 'jao', money: 1},
-      {name: 'Pedrao', money: 1},
-      {name: 'Maria', money: 2},
-      {name: 'Zezin', money: 3}
+      {name: 'jao', money: 1, password: '123'},
+      {name: 'Pedrao', money: 1, password: '123'},
+      {name: 'Maria', money: 2, password: '123'},
+      {name: 'Zezin', money: 3, password: '123'}
     ],
     tomatoes: [
       {id: 1, name: 'Bob', weight: 30, good: true},
@@ -35,6 +36,9 @@ const store = new Vuex.Store({
 
   // GETTERS
   getters: {
+    allUsers (state) {
+      return state.users
+    },
     moreThanOne: state => {
       return state.users.filter(user => user.money > 1)
     },
@@ -105,8 +109,38 @@ const store = new Vuex.Store({
     ADD_USER_RICH (state) {
       state.users.push({name: faker.name.findName(), money: 10})
     },
+    addTheUser (state, payload) {
+      state.users.push({...payload})
+    },
     ADD_TOMATO: function (state, payload) {
       state.tomatoes.push(payload)
+    }
+  },
+
+  actions: {
+    increment (context) {
+      context.commit('increment')
+    },
+    incrementAsync (context) {
+      setTimeout(() => {
+        context.commit('increment')
+      }, 2000)
+    },
+    incrementWith (context, payload) {
+      context.commit('incrementComPayload', payload)
+    },
+    addTheUser (context, payload) {
+      context.commit('increment')
+      axios.get('https://makemeapassword.org/api/v1/pronouncable/json?c=1&sc=5')
+        .then(r => {
+          const password = r.data.pws[0]
+          Vue.set(payload, 'password', password) // ou {...payload, password}
+          // ou também context.commit('addTheUser', {...payload, password})
+          context.commit('addTheUser', payload)
+        })
+        .catch(r => {
+          alert('DEU RUIM')
+        })
     }
   }
 })
@@ -140,6 +174,9 @@ const Counter = {
           </li>
           <li>
             <router-link :to="{name: 'mutation'}">Mutation</router-link>
+          </li>
+          <li>
+            <router-link :to="{name: 'action'}">Action</router-link>
           </li>
         </ul>
       </div>
