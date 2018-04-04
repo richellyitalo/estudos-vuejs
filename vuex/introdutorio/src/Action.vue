@@ -1,6 +1,6 @@
 <script>
 import faker from 'faker'
-import {mapGetters, mapMutations} from 'vuex'
+import {mapGetters, mapMutations, mapActions} from 'vuex'
 import {ADD_BAD_TOMATO, ADD_RAND_TOMATO} from './mutation-types'
 
 export default {
@@ -42,6 +42,23 @@ export default {
         name: faker.name.firstName(),
         money: faker.random.number()
       }
+    },
+    ...mapActions([
+      'addTheUser',
+      'incrementPromise',
+      'subIncrementPromise',
+      'addGoodTomato',
+      'addBadTomato'
+    ]),
+    incrementPromiseMethod () {
+      this.incrementPromise().then(() => {
+        alert('OH_LOKO_BIXOU')
+      })
+    },
+    subIncrementPromiseMethod () {
+      this.subIncrementPromise().then(() => {
+        alert('OH_SUB_LOKO_BIXAO')
+      })
     }
   }
 }
@@ -74,6 +91,32 @@ export default {
         </button>
         <button class="btn btn-block btn-primary" @click=addAndRandomUser>
           Method addAndRandomUser
+        </button>
+        <button class="btn btn-block btn-primary" @click=addTheUser(user)>
+          Method 'AddTheUser'
+        </button>
+        <hr/>
+        <button class="btn btn-block btn-primary" @click=incrementPromise>
+          Method 'incrementPromise'
+        </button>
+      </div>
+      <div class="col-md-2">
+        <button class="btn btn-block btn-primary" @click=incrementPromiseMethod>
+          Method 'incrementPromiseMethod'
+        </button>
+        <button class="btn btn-block btn-warning" @click=subIncrementPromise>
+          Method 'subIncrementPromise'
+        </button>
+        <button class="btn btn-block btn-success" @click=subIncrementPromiseMethod>
+          Method 'subIncrementPromiseMethod'
+        </button>
+        <hr/>
+        <p class="text-center">Async/await</p>
+        <button class="btn btn-block btn-success" @click=addGoodTomato>
+          Method 'addGoodTomato'
+        </button>
+        <button class="btn btn-block btn-danger" @click=addBadTomato>
+          Method 'addBadTomato'
         </button>
       </div>
       <div class="col-md-2">

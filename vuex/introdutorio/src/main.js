@@ -17,6 +17,22 @@ Vue.config.productionTip = false
 
 Vue.use(Vuex)
 
+const getTomatoGood = () => {
+  return axios.get('https://makemeapassword.org/api/v1/pronouncable/json?c=1&sc=5')
+    .then(r => {
+      const password = r.data.pws[0]
+      return {id: 1, name: password, weight: 30, good: true}
+    })
+}
+
+const getTomatoBad = () => {
+  return axios.get('https://makemeapassword.org/api/v1/pronouncable/json?c=1&sc=5')
+    .then(r => {
+      const password = r.data.pws[0]
+      return {id: 1, name: password, weight: 30, good: false}
+    })
+}
+
 const store = new Vuex.Store({
   state: {
     count: 0,
@@ -72,6 +88,14 @@ const store = new Vuex.Store({
       }
       state.tomatoes.push(tomato)
     },
+    addBadTomato (state) {
+      const tomato = {
+        name: faker.name.firstName(),
+        weight: faker.random.number(),
+        good: false
+      }
+      state.tomatoes.push(tomato)
+    },
     [ADD_RAND_TOMATO] (state) {
       const tomato = {
         name: faker.name.firstName(),
@@ -91,6 +115,12 @@ const store = new Vuex.Store({
 
     increment (state) {
       state.count++
+    },
+    increment10 (state) {
+      state.count += 10
+    },
+    increment10Delay (state) {
+      state.count += 10
     },
     incrementComPayload (state, n) {
       state.count += n
@@ -141,6 +171,29 @@ const store = new Vuex.Store({
         .catch(r => {
           alert('DEU RUIM')
         })
+    },
+    incrementPromise (context) {
+      return new Promise((resolve, reject) => {
+        setTimeout(() => {
+          context.commit('increment')
+          resolve()
+          // reject(new Error('DEU_RUIM'))
+        }, 1000)
+      }
+      )
+    },
+    subIncrementPromise (context) {
+      return context.dispatch('incrementPromise').then(() => {
+        context.commit('increment10')
+      })
+    },
+    // async await
+    async addGoodTomato (context) {
+      context.commit('addTheTomato', await getTomatoGood())
+    },
+    async addBadTomato (context) {
+      await context.dispatch('addGoodTomato')
+      context.commit('addTheTomato', await getTomatoBad())
     }
   }
 })
